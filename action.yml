@@ -11,12 +11,18 @@ runs:
   using: "composite"
   steps:
     - run: |
-        cd ${{ github.workspace }}
         python -m pip install antlr4-tools
-        wget https://raw.githubusercontent.com/Beakerboy/VBA_Tokenizer/ANTLR/VbaLint
-        chmod +x VbaLint
+        wget https://raw.githubusercontent.com/Beakerboy/VBA_Tokenizer/ANTLR/vba.g4
+        antlr4-parse
       shell: bash
     - run: |
-        cd ${{ inputs.path }}
-        ${{ github.workspace }}/VbaLint
+        for x in $(find ${{ inputs.path }} \( -name "*.cls" -o -name "*.bas" -o -name "*.frm" \))
+        do
+          foo=$(antlr4-parse vba.g4 startRule $x)
+          echo "$x"
+          if [[ $foo != "" ]];
+          then echo $foo 1>&2;
+            exit 1;
+          fi
+        done
       shell: bash
