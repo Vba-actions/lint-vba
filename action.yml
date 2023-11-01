@@ -16,7 +16,7 @@ runs:
         antlr4-parse 1>/dev/null
       shell: bash
     - env:
-        FULLPATH = "${{ github.workspace }}/${{ inputs.path }}"
+        FULLPATH: "${{ github.workspace }}/${{ inputs.path }}"
       run: |
         for x in $(find $FULLPATH \( -name "*.cls" -o -name "*.bas" -o -name "*.frm" \))
         do
