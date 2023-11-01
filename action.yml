@@ -1,5 +1,8 @@
-name: 'Lint'
+name: 'Lint VBA'
 description: 'Lint VBA source code.'
+branding:
+  icon: "sun"
+  color: "red"
 inputs:
   path:
     description: 'Path to source files.'
