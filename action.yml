@@ -6,17 +6,25 @@ branding:
 inputs:
   path:
     description: 'Path to source files.'
-    default: ${{ github.workspace }}
+    default: "."
 runs:
   using: "composite"
   steps:
     - run: |
-        cd ${{ github.workspace }}
-        python -m pip install antlr4-tools
-        wget https://raw.githubusercontent.com/Beakerboy/VBA_Tokenizer/ANTLR/VbaLint
-        chmod +x VbaLint
+        python -m pip install antlr4-tools 1>/dev/null
+        wget -q https://raw.githubusercontent.com/Beakerboy/VBA_Tokenizer/ANTLR/vba.g4
+        antlr4-parse 1>/dev/null
       shell: bash
-    - run: |
-        cd ${{ inputs.path }}
-        ${{ github.workspace }}/VbaLint
+    - env:
+        FULLPATH: "${{ github.workspace }}/${{ inputs.path }}"
+      run: |
+        for x in $(find $FULLPATH \( -name "*.cls" -o -name "*.bas" -o -name "*.frm" \))
+        do
+          foo=$(antlr4-parse vba.g4 startRule $x)
+          echo "$x"
+          if [[ $foo != "" ]];
+          then echo $foo 1>&2;
+            exit 1;
+          fi
+        done
       shell: bash
