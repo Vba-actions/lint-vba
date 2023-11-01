@@ -16,8 +16,8 @@ runs:
         antlr4-parse 1>/dev/null
       shell: bash
     - run: |
-        fullpath = "${{ github.workspace }}/${{ inputs.path }}"
-        for x in $(find ${{ fullpath }} \( -name "*.cls" -o -name "*.bas" -o -name "*.frm" \))
+        ${{ inputs.path }} = "${{ github.workspace }}/${{ inputs.path }}"
+        for x in $(find ${{ inputs.path }} \( -name "*.cls" -o -name "*.bas" -o -name "*.frm" \))
         do
           foo=$(antlr4-parse vba.g4 startRule $x)
           echo "$x"
