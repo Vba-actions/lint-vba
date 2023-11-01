@@ -1,5 +1,5 @@
 # VBA Linter  
-Ensure Python code quality.
+Ensure VBA code quality.
 
 ## Configuration
 
