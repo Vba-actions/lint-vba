@@ -3,17 +3,17 @@ description: 'Lint VBA source code.'
 inputs:
   path:
     description: 'Path to source files.'
-    default: ${{ github.repository }}
+    default: ${{ github.workspace }}
 runs:
   using: "composite"
   steps:
     - run: |
-        cd ${{ github.repository }}
+        cd ${{ github.workspace }}
         python -m pip install antlr4-tools
         wget https://raw.githubusercontent.com/Beakerboy/VBA_Tokenizer/ANTLR/VbaLint
         chmod +x VbaLint
       shell: bash
     - run: |
-        cd ${{ inputs.who-to-greet }}
-        ${{ github.repository }}/VbaLint
+        cd ${{ inputs.path }}
+        ${{ github.workspace }}/VbaLint
       shell: bash
