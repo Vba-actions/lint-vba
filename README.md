@@ -1,4 +1,4 @@
-# Python Linter  
+# VBA Linter  
 Ensure Python code quality.
 
 ## Configuration
