@@ -12,7 +12,7 @@ runs:
   steps:
     - run: |
         python -m pip install setuptools --upgrade
-        python -m pip install vba_linter@git+https://github.com/Beakerboy/VBA-Linter
+        python -m pip install git+https://github.com/Beakerboy/VBA-Linter
       shell: bash
     - env:
         FULLPATH: "${{ github.workspace }}/${{ inputs.path }}"
