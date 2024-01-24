@@ -11,6 +11,7 @@ runs:
   using: "composite"
   steps:
     - run: |
+        python -m pip install pip --upgrade
         python -m pip install setuptools --upgrade
         python -m pip install git+https://github.com/Beakerboy/VBA-Linter.git@dev
       shell: bash
