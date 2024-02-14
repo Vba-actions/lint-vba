@@ -18,5 +18,5 @@ runs:
     - env:
         FULLPATH: "${{ github.workspace }}/${{ inputs.path }}"
       run: |
-        python -m vba_linter -i 400 $FULLPATH none
+        python -m vba_linter $FULLPATH none
       shell: bash
