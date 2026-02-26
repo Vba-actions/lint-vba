@@ -11,10 +11,12 @@ runs:
   using: "composite"
   steps:
     - run: |
-        python -m pip install vba_linter
+        python -m pip install pip --upgrade
+        python -m pip install setuptools --upgrade
+        python -m pip install git+https://github.com/Beakerboy/VBA-Linter.git@dev
       shell: bash
     - env:
         FULLPATH: "${{ github.workspace }}/${{ inputs.path }}"
       run: |
-        python -m vba_linter $FULLPATH
+        python -m vba_linter -i 400 $FULLPATH
       shell: bash
