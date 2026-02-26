@@ -13,7 +13,7 @@ Ensure VBA code quality.
  steps:
  - uses: actions/checkout@v3
  - name: Lint
-   uses: Vba-actions/lint-vba@main
+   uses: Vba-actions/lint-vba@v1
    with:
      path: "src"
 ```
